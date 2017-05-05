@@ -1,0 +1,38 @@
+{
+    "name":"finance",
+    "version":"0.0.0",
+    "author":"",
+    "location":"coryasilva/finance#v0.0.0",
+    "homepage":"https://github.com/coryasilva/finance",
+    "documentation":"https://github.com/coryasilva/finance",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/coryasilva/finance"
+    },
+    "bugs":"https://github.com/coryasilva/finance/issues",
+    "slug":"finance",
+    "shortDescription":"Common financial functions",
+    "description":"Common financial functions",
+    "type":"modules",
+    "dependencies":{
+        
+    },
+    "devDependencies":{
+        "coldbox":"^4.3.0+188",
+        "testbox":"^2.4.0+80"
+    },
+    "installPaths":{
+        "testbox":"testbox",
+        "coldbox":"tests\\resources\\app\\coldbox"
+    },
+    "scripts":{
+        "postVersion":"package set location='coryasilva/finance#v`package version`'",
+        "onRelease":"publish",
+        "postPublish":"!git push && !git push --tags"
+    },
+    "ignore":[
+        "**/.*",
+        "test",
+        "tests"
+    ]
+}
