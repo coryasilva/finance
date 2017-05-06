@@ -1,8 +1,8 @@
 {
     "name":"finance",
-    "version":"0.0.0",
+    "version":"1.0.0",
     "author":"",
-    "location":"coryasilva/finance#v0.0.0",
+    "location":"coryasilva/finance#v1.0.0",
     "homepage":"https://github.com/coryasilva/finance",
     "documentation":"https://github.com/coryasilva/finance",
     "repository":{
@@ -36,6 +36,6 @@
         "tests"
     ],
     "testbox":{
-        "runner": "http://localhost:50279/tests/runner.cfm"
+        "runner":"http://localhost:50279/tests/runner.cfm"
     }
 }
