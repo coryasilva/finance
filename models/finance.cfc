@@ -16,11 +16,15 @@ component accessors="false"{
 	finance function init(){
 		return this;
 	}
+
+	// Private
 	private function validateType(type, method) {
 		if (type != 0 && type != 1) {
 			throw('finance.#method#: type parameters must be 1 or 0');
 		}
 	}
+
+	// Public
 	/**
 	* Calculates the future value of an investment based on a constant interest rate.
 	*
