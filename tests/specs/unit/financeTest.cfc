@@ -9,7 +9,7 @@ component extends="coldbox.system.testing.BaseModelTest" model="models.finance"{
 	function afterAll(){}
 	/*********************************** HELPERS ***********************************/
 	function fixer(x) {
-		return fix(precisionEvaluate(x * 10000000000)) / 10000000000;
+		return precisionEvaluate(fix(precisionEvaluate(x * 10000000000)) / 10000000000);
 	}
 	/*********************************** BDD SUITES ***********************************/
 	function run(){
