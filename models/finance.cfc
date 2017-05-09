@@ -23,7 +23,7 @@ component accessors="false"{
 			throw('finance.#method#: type parameters must be 1 or 0');
 		}
 	}
-
+	
 	// Public
 	/**
 	* Calculates the future value of an investment based on a constant interest rate.
@@ -186,7 +186,7 @@ component accessors="false"{
 		if (npery < 1) {
 			throw('finance.effect: npery must be an integer GTE 1');
 		}
-		rate = javaCast('BigDecimal', nominalRate);
+		var rate = javaCast('BigDecimal', nominalRate);
 		return rate.divide(javaCast('BigDecimal', npery)).add(javaCast('BigDecimal', 1)).pow(javaCast('int', npery)).subtract(javaCast('BigDecimal',1));
 	}
 
@@ -203,7 +203,7 @@ component accessors="false"{
 		if (npery < 1) {
 			throw('finance.nominal: npery must be an integer GTE 1');
 		}
-		rate = javaCast('BigDecimal', effectiveRate);
+		var rate = javaCast('BigDecimal', effectiveRate);
 		var tmp = rate.add(javaCast('BigDecimal', 1))
 		var tmp = precisionEvaluate((rate + 1)^(1/npery));
 		return precisionEvaluate((tmp - 1) * npery);

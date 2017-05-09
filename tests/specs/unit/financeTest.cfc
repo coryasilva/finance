@@ -134,7 +134,7 @@ component extends="coldbox.system.testing.BaseModelTest" model="models.finance"{
 			/*
 			it('can calculate RATE', function() {
 				var val = model.rate(4*12, -200, 8000);
-				expect(val).toBe(0.01);
+				expect(val).toBe(0.007701472488);
 				//       excel:  0.007701472488201370000000000000
             });
 			it('can calculate RATE', function() {
@@ -143,14 +143,14 @@ component extends="coldbox.system.testing.BaseModelTest" model="models.finance"{
 				//       excel:  0.092417669858416400000000000000
             });
 			it('can calculate IRR', function() {
-				var val = model.irr([-70000, 12000, 15000, 18000, 21000])
-				expect(val).toBe(-0.021);
+				var val = model.irr([-70000, 12000, 15000, 18000, 21000]);
+				expect(val).toBe(-0.021244848273);
 				//       excel:  -0.021244848273410900000000000000
 
             });
 			it('can calculate IRR', function() {
-				var val = model.irr([-70000, 12000, 15000, 18000, 21000, 26000])
-				expect(val).toBe(0.087);
+				var val = model.irr([-70000, 12000, 15000, 18000, 21000, 26000]);
+				expect(val).toBe('0.086630948036531493');
 				//       excel:  0.086630948036522200000000000000
             });
 			it('can calculate IRR', function() {
