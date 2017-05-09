@@ -203,8 +203,6 @@ component accessors="false"{
 		if (npery < 1) {
 			throw('finance.nominal: npery must be an integer GTE 1');
 		}
-		var rate = javaCast('BigDecimal', effectiveRate);
-		var tmp = rate.add(javaCast('BigDecimal', 1))
 		var tmp = precisionEvaluate((rate + 1)^(1/npery));
 		return precisionEvaluate((tmp - 1) * npery);
 	}
