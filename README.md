@@ -2,8 +2,8 @@
 
 [![Master Branch Build Status](https://img.shields.io/travis/coryasilva/finance/master.svg?style=flat-square&label=master)](https://travis-ci.org/coryasilva/finance)
 
-The repository contains common financial functions that will hopefully be contributed too.  This is a CFML code that
-conforms to [Coldbox's](https://www.ortussolutions.com/products/coldbox) module format.
+The repository contains common financial functions that will hopefully be contributed too and reviewed.  This is a CFML code is setup as a
+[Coldbox's](https://www.ortussolutions.com/products/coldbox) module.  The actual working code is in `models/finance.cfc` file.
 
 ## Common financial functions
 
@@ -21,6 +21,7 @@ _Most functions are implemented following the spreadsheet formulas from [Microso
 - **PMT**: Returns the periodic payment for an annuity
 - **PPMT**: Returns the payment on the principal for an investment for a given period
 - **PV**: Returns the present value of an investment
+- **RATE**: Returns the interest rate per period of an annuity
 
 #### NOT implemented
 
@@ -56,7 +57,6 @@ _Most functions are implemented following the spreadsheet formulas from [Microso
 - PRICE: Returns the price per $100 face value of a security that pays periodic interest
 - PRICEDISC: Returns the price per $100 face value of a discounted security
 - PRICEMAT: Returns the price per $100 face value of a security that pays interest at maturity
-- RATE: Returns the interest rate per period of an annuity
 - RECEIVED: Returns the amount received at maturity for a fully invested security
 - RRI: Returns an equivalent interest rate for the growth of an investment
 - SLN: Returns the straight-line depreciation of an asset for one period
@@ -75,4 +75,4 @@ _Most functions are implemented following the spreadsheet formulas from [Microso
 Nothing here is original work, credit is due to the people from the companies/organizations below:
 - [Microsoft](https://support.office.com/en-gb/article/Financial-functions-reference-5658d81e-6035-4f24-89c1-fbf124c2b1d8?ui=en-US&rs=en-GB&ad=GB)
 - [Handsontable](https://github.com/handsontable/formula.js/blob/develop/lib/financial.js)
-- [LibreOffice](https://github.com/LibreOffice/core/tree/452b8334e60082c113809f90fd59967ac9c471a2/sc/source/core/opencl)
+- [LibreOffice/OpenOffice](https://github.com/LibreOffice/core/tree/452b8334e60082c113809f90fd59967ac9c471a2/sc/source/core/opencl)
