@@ -1,8 +1,8 @@
 {
     "name":"finance",
-    "version":"v0.1.0",
+    "version":"0.2.0",
     "author":"",
-    "location":"coryasilva/finance#v0.1.0",
+    "location":"coryasilva/finance#v0.2.0",
     "homepage":"https://github.com/coryasilva/finance",
     "documentation":"https://github.com/coryasilva/finance",
     "repository":{
