@@ -9,7 +9,6 @@ component accessors="false"{
 	* Note: PrecisionEvaluate() only uses BigDecimal for + -  * / anything else will end up as a float or double
 	* https://cfdocs.org/precisionevaluate
 	* 
-	* TODO: IRR, RATE
 	*/
 
 	// Constructor
@@ -205,6 +204,60 @@ component accessors="false"{
 		}
 		var tmp = precisionEvaluate((effectiveRate + 1)^(1/npery));
 		return precisionEvaluate((tmp - 1) * npery);
+	}
+
+	/**
+	 * Calculate interest rate per period for an annuity
+     * 
+     * @param rate 	 Interest rate per period
+	 * @param per 	 Specifies the period and must be in the range 1 to nper
+	 * @param nper 	 Total number of periods (payments)
+     * @param pv 	 Present Value 
+     * @param fv 	 Future Value (Generally zero for calculating payments. Non zero for pay down to ammount.) 
+	 * @param type 	 The number 0 (zero) or 1 and indicates when payments are due
+	 */
+	public numeric function rate(required numeric nper, required numeric pmt, required numeric pv, numeric fv=0, numeric type=0, numeric guess=0.01) {
+		// Set maximum epsilon for end of iteration
+		var epsMax = .0000000001; //1e-10
+
+		// Set maximum number of iterations
+		var iterMax = 50;
+
+		// Implement Newton's method
+		var y = 0;
+		var y0 = 0; 
+		var y1 = 0;
+		var x0 = 0;
+		var x1 = 0;
+		var f = 0; 
+		var i = 0;
+		var rate = guess;
+		if (abs(rate) < epsMax) {
+			y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
+		} else {
+			f = exp(nper * log(1 + rate));
+			y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+		}
+		y0 = pv + pmt * nper + fv;
+		y1 = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+		i = x0 = 0;
+		x1 = rate;
+		while ((abs(y0 - y1) > epsMax) && (i < iterMax)) {
+			rate = (y1 * x0 - y0 * x1) / (y1 - y0);
+			x0 = x1;
+			x1 = rate;
+			if (abs(rate) < epsMax) {
+				y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
+			} 
+			else {
+				f = exp(nper * log(1 + rate));
+				y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+			}
+			y0 = y1;
+			y1 = y;
+			++i;
+		}
+		return rate;
 	}
 
 	/** 
