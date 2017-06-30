@@ -23,7 +23,7 @@
     },
     "installPaths":{
         "testbox":"testbox",
-        "coldbox":"tests\\resources\\app\\coldbox"
+        "coldbox":"tests\\resources\\app/coldbox"
     },
     "scripts":{
         "postVersion":"package set location='coryasilva/finance#v`package version`'",
@@ -36,6 +36,6 @@
         "tests"
     ],
     "testbox":{
-        "runner":"http://localhost:50279/tests/runner.cfm"
+        "runner":"http://localhost:56464/tests/runner.cfm"
     }
 }

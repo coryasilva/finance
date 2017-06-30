@@ -146,6 +146,11 @@ component extends="coldbox.system.testing.BaseModelTest" model="models.finance"{
                 expect(fixer(val)).toBeCloseTo(0.0924176, epsilon);
                 //       excel:  0.092417669858416400000000000000
             });
+            it('can calculate RATE', function() {
+                var val = model.rate(360, -772.46, 96000)*12;
+                expect(fixer(val)).toBeCloseTo(0.0900032, epsilon);
+                //       excel:  0.090003226583000600000000000000
+            });
             /*
             it('can calculate IRR', function() {
                 var val = model.irr([-70000, 12000, 15000, 18000, 21000]);

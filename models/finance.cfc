@@ -206,58 +206,41 @@ component accessors="false"{
 		return precisionEvaluate((tmp - 1) * npery);
 	}
 
+
+	private function rate_helper(required numeric a, required numeric nper, required numeric pmt, required numeric pv, required numeric fv, required numeric type, required numeric guess) {
+		var p2 = (1 + a)^(nper - 1);
+		var p1 = p2 * (1 + a);
+		return {
+			"y0": pv * p1 + pmt * (1 / a + type) * (p1 - 1) + fv,
+			"y1": nper * pv * p2 + pmt * (-(p1 - 1) / (a * a) + (1 / a + type) * nper * p2)
+		};
+	}
+
 	/**
 	 * Calculate interest rate per period for an annuity
      * 
-     * @param rate 	 Interest rate per period
-	 * @param per 	 Specifies the period and must be in the range 1 to nper
-	 * @param nper 	 Total number of periods (payments)
+     * @param nper 	 Total number of periods (payments)
+	 * @param pmt 	 Payment made each period 
      * @param pv 	 Present Value 
      * @param fv 	 Future Value (Generally zero for calculating payments. Non zero for pay down to ammount.) 
 	 * @param type 	 The number 0 (zero) or 1 and indicates when payments are due
+	 * @param guess  Your guess of what the rate will be.
 	 */
-	public numeric function rate(required numeric nper, required numeric pmt, required numeric pv, numeric fv=0, numeric type=0, numeric guess=0.01) {
-		// Set maximum epsilon for end of iteration
-		var epsMax = .0000000001; //1e-10
-
-		// Set maximum number of iterations
-		var iterMax = 50;
-
-		// Implement Newton's method
-		var y = 0;
-		var y0 = 0; 
-		var y1 = 0;
-		var x0 = 0;
-		var x1 = 0;
-		var f = 0; 
-		var i = 0;
-		var rate = guess;
-		if (abs(rate) < epsMax) {
-			y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
-		} else {
-			f = exp(nper * log(1 + rate));
-			y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
-		}
-		y0 = pv + pmt * nper + fv;
-		y1 = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
-		i = x0 = 0;
-		x1 = rate;
-		while ((abs(y0 - y1) > epsMax) && (i < iterMax)) {
-			rate = (y1 * x0 - y0 * x1) / (y1 - y0);
-			x0 = x1;
-			x1 = rate;
-			if (abs(rate) < epsMax) {
-				y = pv * (1 + nper * rate) + pmt * (1 + rate * type) * nper + fv;
-			} 
-			else {
-				f = exp(nper * log(1 + rate));
-				y = pv * f + pmt * (1 / rate + type) * (f - 1) + fv;
+	function rate(required numeric nper, required numeric pmt, required numeric pv, numeric fv=0, numeric type=0, numeric guess=0.1){
+		var max = 50;
+		var epsMax = 1e-7;
+		var rt = guess;
+		for (var i = 1; i <= max; i++) {
+			var s = rate_helper(rt, nper, pmt, pv, fv, type, guess);
+			var y0 = s.y0;
+			var y1 = s.y1;
+			var x = y0 / y1;
+			rt -= x;
+			if (abs(x) < epsMax) {
+				return rt;
 			}
-			y0 = y1;
-			y1 = y;
-			++i;
 		}
-		return rate;
+		throw('finance.error');
 	}
 
 	/** 
